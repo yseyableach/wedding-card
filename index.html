@@ -8,10 +8,12 @@
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&display=swap');
         body { font-family: 'Noto Sans TC', sans-serif; background-color: #FFFBF0; }
-        .kuso-bounce { animation: bounce 2s infinite; }
+        .animate-spin-slow { animation: spin 8s linear infinite; }
+        @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
     </style>
 </head>
 <body>
@@ -20,21 +22,27 @@
     <script type="text/babel">
         const { useState, useEffect } = React;
         
-        // --- [ 配置區：請在此修改你們的資訊 ] ---
+        // --- [ 這邊就是你們的 .env 配置區 ] ---
         const CONFIG = {
-            [cite_start]googleFormUrl: "https://docs.google.com/forms/d/e/你的表單ID/viewform", // 替換為你們的 Google 表單網址 [cite: 22]
+            googleFormUrl: "https://docs.google.com/forms/d/e/你的表單ID/viewform",
+            // 圖片路徑建議：把圖片放在 images/ 資料夾下
             images: {
-                [cite_start]hero: "./images/hero.jpg",      // 封面圖路徑 [cite: 22]
-                [cite_start]photo1: "./images/p1.jpg",     // 相簿圖路徑 [cite: 22]
-                photo2: "./images/p2.jpg",
-                photo3: "./images/p3.jpg",
-                photo4: "./images/p4.jpg",
-                photo5: "./images/p5.jpg",
-                photo6: "./images/p6.jpg",
+                hero: "./images/hero.jpg",      // 主視覺圖
+                photo1: "./images/p1.jpg",     // 相簿圖 1
+                photo2: "./images/p2.jpg",     // 相簿圖 2
+                photo3: "./images/p3.jpg",     // 相簿圖 3
+                photo4: "./images/p4.jpg",     // 相簿圖 4
+                photo5: "./images/p5.jpg",     // 相簿圖 5
+                photo6: "./images/p6.jpg",     // 相簿圖 6
             },
-            [cite_start]names: { groom: "程傑", bride: "郁庭" }, [cite: 19]
-            [cite_start]date: "2027.05.01", [cite: 1]
-            [cite_start]venue: "台北萬豪酒店 36F 寰宇廳" [cite: 19]
+            names: { groom: "程傑", bride: "郁庭" },
+            date: "2027.05.01",
+            venue: "台北萬豪酒店 36F 寰宇廳"
+        };
+
+        // 引入 Lucide Icons (簡易版替代方案)
+        const Icon = ({ name, size = 24, className = "" }) => {
+            return <i data-lucide={name} className={className} style={{ width: size, height: size }}></i>;
         };
 
         const App = () => {
@@ -42,7 +50,6 @@
             const [noBtnPos, setNoBtnPos] = useState({ top: 0, left: 0 });
             const [isNoBtnEscaping, setIsNoBtnEscaping] = useState(false);
 
-            [cite_start]// 倒數計時邏輯 [cite: 2]
             useEffect(() => {
                 const target = new Date('2027-05-01T12:00:00').getTime();
                 const timer = setInterval(() => {
@@ -58,68 +65,123 @@
                 return () => clearInterval(timer);
             }, []);
 
-            [cite_start]// Kuso 逃跑按鈕邏輯 [cite: 2]
             const handleNoHover = () => {
                 setIsNoBtnEscaping(true);
                 setNoBtnPos({ 
-                    top: Math.floor(Math.random() * 150) - 75, 
-                    left: Math.floor(Math.random() * 150) - 75 
+                    top: Math.floor(Math.random() * 100) - 50, 
+                    left: Math.floor(Math.random() * 100) - 50 
                 });
             };
 
             return (
-                <div className="min-h-screen">
-                    {/* Hero 封面 */}
-                    <section className="relative h-screen flex flex-col items-center justify-center text-center p-6 bg-rose-50 overflow-hidden">
-                        <img src={CONFIG.images.hero} className="absolute inset-0 w-full h-full object-cover opacity-30 mix-blend-overlay" />
-                        <div className="z-10">
-                            [cite_start]<div className="inline-block bg-black text-white px-4 py-1 text-xs font-black tracking-widest mb-4">震撼彈！2027 最強合約簽署</div> [cite: 2]
-                            <h1 className="text-6xl md:text-8xl font-black text-rose-500 italic mb-4">
-                                {CONFIG.names.groom} & {CONFIG.names.bride}
+                <div className="overflow-x-hidden">
+                    {/* 1. 封面 */}
+                    <section className="relative h-screen flex flex-col items-center justify-center text-center p-6">
+                        <div className="absolute inset-0 -z-10 bg-rose-50 overflow-hidden">
+                            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150%] h-[150%] bg-[radial-gradient(circle,#fda4af_0%,transparent_70%)] opacity-20 animate-pulse"></div>
+                            {/* 這裡是主圖 */}
+                            <img src={CONFIG.images.hero} className="w-full h-full object-cover opacity-40 mix-blend-overlay" onError={(e) => e.target.style.display='none'} />
+                        </div>
+                        
+                        <div className="space-y-6">
+                            <div className="inline-block bg-black text-white px-4 py-1 text-xs font-black tracking-widest uppercase">Official Announcement</div>
+                            <h1 className="text-6xl md:text-8xl font-black text-rose-500 italic leading-tight">
+                                {CONFIG.names.groom} <span className="text-gray-400 not-italic">&</span> {CONFIG.names.bride}
                             </h1>
-                            <p className="text-2xl font-bold text-gray-600">{CONFIG.date}</p>
-                            [cite_start]<p className="text-rose-400 font-bold mt-2">📍 {CONFIG.venue}</p> [cite: 19]
+                            <p className="text-2xl font-bold text-gray-600 tracking-widest">{CONFIG.date}</p>
+                            <div className="flex items-center justify-center gap-2 text-rose-400 font-bold">
+                                📍 {CONFIG.venue}
+                            </div>
+                        </div>
+
+                        <div className="absolute bottom-10 animate-bounce">
+                            <p className="text-[10px] font-black text-rose-300 uppercase tracking-widest">Scroll Down</p>
                         </div>
                     </section>
 
-                    {/* 倒數計時區 */}
-                    <section className="py-16 bg-white flex justify-center gap-6">
+                    {/* 2. 倒數 */}
+                    <section className="py-20 bg-white shadow-inner flex justify-center gap-4 md:gap-10">
                         {Object.entries(countdown).map(([u, v]) => (
                             <div key={u} className="text-center">
-                                <div className="text-4xl md:text-6xl font-black text-rose-500 tabular-nums">{v}</div>
+                                <div className="text-4xl md:text-7xl font-black text-rose-500">{v}</div>
                                 <div className="text-xs font-bold text-gray-300 uppercase">{u}</div>
                             </div>
                         ))}
                     </section>
 
-                    {/* Kuso 介紹區 */}
-                    <section className="py-24 px-6 max-w-4xl mx-auto text-center">
-                        <div className="bg-white p-10 rounded-[3rem] shadow-xl border-2 border-rose-50">
-                            [cite_start]<h2 className="text-3xl font-black mb-6 italic">「我們要結婚了（且不接受退貨）」</h2> [cite: 2]
-                            <p className="text-lg text-gray-500 leading-relaxed">
-                                歷經數年相處，我們決定把對方的名字寫進戶口名簿。<br/>
-                                [cite_start]<strong>程傑</strong> 擅長洗碗道歉，<strong>郁庭</strong> 擅長沙發秒睡。<br/> [cite: 19]
-                                [cite_start]歡迎大家到萬豪 36 樓，在高空見證我們（海拔很高沒地方跑）。 [cite: 19]
+                    {/* 3. Kuso 介紹 */}
+                    <section className="py-24 px-6 max-w-4xl mx-auto text-center space-y-16">
+                        <div className="bg-white p-10 md:p-20 rounded-[3rem] shadow-2xl border-2 border-rose-50 relative">
+                            <div className="absolute -top-6 -right-6 bg-yellow-400 w-24 h-24 rounded-full flex items-center justify-center font-black rotate-12 shadow-lg">震撼彈!</div>
+                            <h2 className="text-3xl md:text-5xl font-black mb-8 italic">「關於這份終身合約...」</h2>
+                            <p className="text-lg text-gray-500 leading-loose">
+                                經過長達數年的「性能測試」與「壓力評估」，<br/>
+                                <strong>程傑</strong> 與 <strong>郁庭</strong> 決定正式進入運維階段。<br/>
+                                我們不打算退貨，也請大家不要退紅包。<br/>
+                                <span className="text-rose-500 block mt-4 font-black">2027/05/01 萬豪 36 樓，不見不散！</span>
                             </p>
                         </div>
                     </section>
 
-                    {/* 相簿區 */}
-                    <section className="py-20 px-6 max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-3 gap-4">
-                        {[1,2,3,4,5,6].map(i => (
-                            <div key={i} className="bg-white rounded-3xl overflow-hidden shadow-md border-4 border-white">
-                                <img src={CONFIG.images[`photo${i}`]} className="w-full h-auto" />
-                            </div>
-                        ))}
+                    {/* 4. 相簿 */}
+                    <section className="py-20 px-6 max-w-6xl mx-auto">
+                        <div className="columns-2 md:columns-3 gap-4 space-y-4">
+                            {[1,2,3,4,5,6].map(i => (
+                                <div key={i} className="bg-white rounded-3xl overflow-hidden shadow-lg border-4 border-white transform hover:scale-[1.02] transition-transform">
+                                    <img 
+                                        src={CONFIG.images[`photo${i}`]} 
+                                        alt={`Photo ${i}`}
+                                        className="w-full h-auto"
+                                        onError={(e) => {
+                                            e.target.src = "https://via.placeholder.com/400x600?text=Photo+Coming+Soon";
+                                        }}
+                                    />
+                                </div>
+                            ))}
+                        </div>
                     </section>
 
-                    {/* RSVP 互動區 */}
+                    {/* 5. 萬豪 36F 資訊 */}
+                    <section className="py-24 px-6 max-w-4xl mx-auto">
+                        <div className="bg-gray-900 rounded-[3rem] p-10 md:p-16 text-white shadow-2xl space-y-8">
+                            <h3 className="text-4xl font-black italic underline decoration-rose-500 decoration-8">VENUE INFO</h3>
+                            <div className="grid md:grid-cols-2 gap-10 items-center">
+                                <div className="space-y-6">
+                                    <div>
+                                        <p className="text-rose-500 font-bold uppercase text-xs tracking-widest">Where</p>
+                                        <p className="text-2xl font-bold">台北萬豪酒店 36F 寰宇廳</p>
+                                        <p className="text-gray-400 text-sm">台北市中山區樂群二路199號</p>
+                                    </div>
+                                    <div>
+                                        <p className="text-rose-500 font-bold uppercase text-xs tracking-widest">When</p>
+                                        <p className="text-2xl font-bold">11:30 迎賓 / 12:00 開席</p>
+                                    </div>
+                                    <div className="p-4 bg-white/5 rounded-2xl border border-white/10 text-xs text-gray-400">
+                                        💡 小提醒：36樓視野極佳，手機電量請充飽，因為你會拍個不停。
+                                    </div>
+                                </div>
+                                <div className="bg-white/10 aspect-square rounded-3xl flex items-center justify-center text-center p-6 border-2 border-dashed border-white/20">
+                                    <div>
+                                        <p className="font-black text-xl mb-2">GOOGLE MAPS</p>
+                                        <p className="text-xs text-gray-500">部署後可在此嵌入地圖</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    {/* 6. RSVP 逃跑按鈕 */}
                     <section className="py-32 px-6 bg-rose-500 text-white text-center">
-                        <h2 className="text-4xl font-black mb-12">你會來嗎？</h2>
+                        <h2 className="text-4xl font-black mb-12">程傑 & 郁庭 需要你的回覆！</h2>
                         <div className="flex flex-col items-center gap-8 relative">
-                            <a href={CONFIG.googleFormUrl} target="_blank" className="z-10 bg-white text-rose-500 px-12 py-6 rounded-full text-2xl font-black shadow-2xl hover:scale-105 transition-all">
-                                [cite_start]前往 Google 表單報名 [cite: 12]
+                            <a 
+                                href={CONFIG.googleFormUrl}
+                                target="_blank"
+                                className="z-10 bg-white text-rose-500 px-12 py-6 rounded-full text-2xl font-black shadow-2xl hover:scale-110 active:scale-95 transition-all"
+                            >
+                                前往填寫 Google 表單
                             </a>
+
                             <div className="relative h-16 w-full flex justify-center items-center">
                                 <button 
                                     onMouseEnter={handleNoHover}
@@ -127,15 +189,19 @@
                                         position: isNoBtnEscaping ? 'absolute' : 'static',
                                         top: `${noBtnPos.top}px`,
                                         left: `${noBtnPos.left}px`,
-                                        transition: 'all 0.1s'
+                                        transition: 'all 0.1s ease-out'
                                     }}
                                     className="px-6 py-2 bg-rose-400 text-rose-100 text-xs font-bold rounded-full"
                                 >
-                                    [cite_start]不忍心看程傑娶到正妹 (按不到按不到) [cite: 12, 19]
+                                    不忍心看程傑娶到正妹 (按不到按不到)
                                 </button>
                             </div>
                         </div>
                     </section>
+
+                    <footer className="py-20 text-center text-gray-300 text-[10px] font-black uppercase tracking-[0.5em]">
+                        Handcrafted for Cheng-Chieh & Yu-Ting 2027
+                    </footer>
                 </div>
             );
         };
