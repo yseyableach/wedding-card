@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>程傑 & 郁庭 婚禮邀請函 2027.05.01</title>
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&display=swap');
+        body { font-family: 'Noto Sans TC', sans-serif; background-color: #FFFBF0; }
+        .kuso-bounce { animation: bounce 2s infinite; }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+        
+        // --- [ 配置區：請在此修改你們的資訊 ] ---
+        const CONFIG = {
+            [cite_start]googleFormUrl: "https://docs.google.com/forms/d/e/你的表單ID/viewform", // 替換為你們的 Google 表單網址 [cite: 22]
+            images: {
+                [cite_start]hero: "./images/hero.jpg",      // 封面圖路徑 [cite: 22]
+                [cite_start]photo1: "./images/p1.jpg",     // 相簿圖路徑 [cite: 22]
+                photo2: "./images/p2.jpg",
+                photo3: "./images/p3.jpg",
+                photo4: "./images/p4.jpg",
+                photo5: "./images/p5.jpg",
+                photo6: "./images/p6.jpg",
+            },
+            [cite_start]names: { groom: "程傑", bride: "郁庭" }, [cite: 19]
+            [cite_start]date: "2027.05.01", [cite: 1]
+            [cite_start]venue: "台北萬豪酒店 36F 寰宇廳" [cite: 19]
+        };
+
+        const App = () => {
+            const [countdown, setCountdown] = useState({ 天: 0, 時: 0, 分: 0, 秒: 0 });
+            const [noBtnPos, setNoBtnPos] = useState({ top: 0, left: 0 });
+            const [isNoBtnEscaping, setIsNoBtnEscaping] = useState(false);
+
+            [cite_start]// 倒數計時邏輯 [cite: 2]
+            useEffect(() => {
+                const target = new Date('2027-05-01T12:00:00').getTime();
+                const timer = setInterval(() => {
+                    const now = new Date().getTime();
+                    const dist = target - now;
+                    setCountdown({
+                        天: Math.floor(dist / (1000 * 60 * 60 * 24)),
+                        時: Math.floor((dist % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
+                        分: Math.floor((dist % (1000 * 60 * 60)) / (1000 * 60)),
+                        秒: Math.floor((dist % (1000 * 60)) / 1000),
+                    });
+                }, 1000);
+                return () => clearInterval(timer);
+            }, []);
+
+            [cite_start]// Kuso 逃跑按鈕邏輯 [cite: 2]
+            const handleNoHover = () => {
+                setIsNoBtnEscaping(true);
+                setNoBtnPos({ 
+                    top: Math.floor(Math.random() * 150) - 75, 
+                    left: Math.floor(Math.random() * 150) - 75 
+                });
+            };
+
+            return (
+                <div className="min-h-screen">
+                    {/* Hero 封面 */}
+                    <section className="relative h-screen flex flex-col items-center justify-center text-center p-6 bg-rose-50 overflow-hidden">
+                        <img src={CONFIG.images.hero} className="absolute inset-0 w-full h-full object-cover opacity-30 mix-blend-overlay" />
+                        <div className="z-10">
+                            [cite_start]<div className="inline-block bg-black text-white px-4 py-1 text-xs font-black tracking-widest mb-4">震撼彈！2027 最強合約簽署</div> [cite: 2]
+                            <h1 className="text-6xl md:text-8xl font-black text-rose-500 italic mb-4">
+                                {CONFIG.names.groom} & {CONFIG.names.bride}
+                            </h1>
+                            <p className="text-2xl font-bold text-gray-600">{CONFIG.date}</p>
+                            [cite_start]<p className="text-rose-400 font-bold mt-2">📍 {CONFIG.venue}</p> [cite: 19]
+                        </div>
+                    </section>
+
+                    {/* 倒數計時區 */}
+                    <section className="py-16 bg-white flex justify-center gap-6">
+                        {Object.entries(countdown).map(([u, v]) => (
+                            <div key={u} className="text-center">
+                                <div className="text-4xl md:text-6xl font-black text-rose-500 tabular-nums">{v}</div>
+                                <div className="text-xs font-bold text-gray-300 uppercase">{u}</div>
+                            </div>
+                        ))}
+                    </section>
+
+                    {/* Kuso 介紹區 */}
+                    <section className="py-24 px-6 max-w-4xl mx-auto text-center">
+                        <div className="bg-white p-10 rounded-[3rem] shadow-xl border-2 border-rose-50">
+                            [cite_start]<h2 className="text-3xl font-black mb-6 italic">「我們要結婚了（且不接受退貨）」</h2> [cite: 2]
+                            <p className="text-lg text-gray-500 leading-relaxed">
+                                歷經數年相處，我們決定把對方的名字寫進戶口名簿。<br/>
+                                [cite_start]<strong>程傑</strong> 擅長洗碗道歉，<strong>郁庭</strong> 擅長沙發秒睡。<br/> [cite: 19]
+                                [cite_start]歡迎大家到萬豪 36 樓，在高空見證我們（海拔很高沒地方跑）。 [cite: 19]
+                            </p>
+                        </div>
+                    </section>
+
+                    {/* 相簿區 */}
+                    <section className="py-20 px-6 max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-3 gap-4">
+                        {[1,2,3,4,5,6].map(i => (
+                            <div key={i} className="bg-white rounded-3xl overflow-hidden shadow-md border-4 border-white">
+                                <img src={CONFIG.images[`photo${i}`]} className="w-full h-auto" />
+                            </div>
+                        ))}
+                    </section>
+
+                    {/* RSVP 互動區 */}
+                    <section className="py-32 px-6 bg-rose-500 text-white text-center">
+                        <h2 className="text-4xl font-black mb-12">你會來嗎？</h2>
+                        <div className="flex flex-col items-center gap-8 relative">
+                            <a href={CONFIG.googleFormUrl} target="_blank" className="z-10 bg-white text-rose-500 px-12 py-6 rounded-full text-2xl font-black shadow-2xl hover:scale-105 transition-all">
+                                [cite_start]前往 Google 表單報名 [cite: 12]
+                            </a>
+                            <div className="relative h-16 w-full flex justify-center items-center">
+                                <button 
+                                    onMouseEnter={handleNoHover}
+                                    style={{ 
+                                        position: isNoBtnEscaping ? 'absolute' : 'static',
+                                        top: `${noBtnPos.top}px`,
+                                        left: `${noBtnPos.left}px`,
+                                        transition: 'all 0.1s'
+                                    }}
+                                    className="px-6 py-2 bg-rose-400 text-rose-100 text-xs font-bold rounded-full"
+                                >
+                                    [cite_start]不忍心看程傑娶到正妹 (按不到按不到) [cite: 12, 19]
+                                </button>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            );
+        };
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>
