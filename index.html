@@ -113,60 +113,25 @@
       border-radius: 28px;
       overflow: hidden;
       border: 1px solid rgba(200,166,106,.38);
-      background:
-        linear-gradient(180deg, rgba(255,255,255,.22), rgba(255,255,255,.54)),
-        radial-gradient(circle at 50% 35%, rgba(229,210,167,.42), transparent 32%),
-        linear-gradient(135deg, #f2eadc, #fcfaf6 58%, #ead8b5);
+      background: #f2eadc;
+    }
+
+    .hero-photo {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
     }
 
     .photo-stage::before {
       content: "";
       position: absolute;
       inset: 0;
+      z-index: 1;
       background:
-        linear-gradient(180deg, rgba(255,255,255,.04) 0%, rgba(255,255,255,.16) 40%, rgba(255,250,242,.88) 84%, rgba(255,250,242,.96) 100%);
-    }
-
-    .photo-placeholder {
-      position: absolute;
-      inset: 0;
-      display: grid;
-      place-items: center;
-      text-align: center;
-      padding: 32px;
-      color: rgba(111,102,90,.88);
-      font-family: "Noto Serif TC", serif;
-    }
-
-    .photo-frame {
-      width: min(68%, 470px);
-      aspect-ratio: 3 / 4.15;
-      border-radius: 220px 220px 18px 18px;
-      border: 1px solid rgba(200,166,106,.58);
-      background: rgba(255,255,255,.34);
-      box-shadow:
-        inset 0 0 0 10px rgba(255,255,255,.24),
-        0 24px 60px rgba(116,93,56,.10);
-      display: grid;
-      place-items: center;
-      padding: 26px;
-      backdrop-filter: blur(2px);
-    }
-
-    .photo-frame strong {
-      display: block;
-      font-size: 18px;
-      font-weight: 500;
-      letter-spacing: .12em;
-      color: #6a5a43;
-      margin-bottom: 10px;
-    }
-
-    .photo-frame span {
-      display: block;
-      font-size: 13px;
-      line-height: 1.9;
-      letter-spacing: .04em;
+        linear-gradient(180deg, rgba(255,255,255,.12) 0%, rgba(255,255,255,.18) 36%, rgba(255,250,242,.80) 82%, rgba(255,250,242,.96) 100%);
     }
 
     .topline {
@@ -179,7 +144,7 @@
       letter-spacing: .28em;
       text-transform: uppercase;
       position: relative;
-      z-index: 1;
+      z-index: 2;
     }
 
     .monogram {
@@ -199,7 +164,7 @@
 
     .cover-copy {
       position: relative;
-      z-index: 1;
+      z-index: 2;
       text-align: center;
       padding: 0 18px 18px;
       margin-top: auto;
@@ -241,14 +206,6 @@
       color: rgba(55,47,38,.84);
     }
 
-    .venue {
-      margin-top: 16px;
-      color: rgba(84,74,62,.86);
-      font-size: 13px;
-      line-height: 2.05;
-      letter-spacing: .14em;
-    }
-
     .scroll-hint {
       margin-top: 22px;
       display: inline-flex;
@@ -268,7 +225,6 @@
       background: linear-gradient(180deg, var(--gold), transparent);
       animation: floatLine 1.8s ease-in-out infinite;
     }
-
 
     .hero-meta {
       position: relative;
@@ -381,7 +337,6 @@
       font-family: "Noto Serif TC", serif;
     }
 
-
     .transport-card {
       margin-top: 18px;
       padding: 22px;
@@ -475,59 +430,33 @@
     }
 
     .gallery-main,
-    .gallery-side {
-      min-height: 420px;
+    .gallery-mini {
+      position: relative;
+      overflow: hidden;
       border: 1px solid rgba(200,166,106,.30);
       border-radius: 26px;
-      background:
-        radial-gradient(circle at 45% 30%, rgba(229,210,167,.48), transparent 28%),
-        linear-gradient(135deg, #f5eee2, #fffdfa);
-      display: grid;
-      place-items: center;
-      padding: 22px;
-      text-align: center;
-      color: rgba(111,102,90,.82);
-      font-family: "Noto Serif TC", serif;
+      background: #f5eee2;
+      min-height: 420px;
+    }
+
+    .gallery-image {
+      width: 100%;
+      height: 100%;
+      min-height: inherit;
+      display: block;
+      object-fit: cover;
+      object-position: center;
     }
 
     .gallery-side {
       display: grid;
       grid-template-rows: 1fr 1fr;
       gap: 14px;
-      background: transparent;
-      border: 0;
-      padding: 0;
+      min-height: 420px;
     }
 
     .gallery-mini {
-      border: 1px solid rgba(200,166,106,.30);
-      border-radius: 26px;
-      background:
-        radial-gradient(circle at 45% 30%, rgba(229,210,167,.48), transparent 28%),
-        linear-gradient(135deg, #f5eee2, #fffdfa);
-      display: grid;
-      place-items: center;
-      padding: 18px;
-      text-align: center;
-      color: rgba(111,102,90,.82);
-      font-family: "Noto Serif TC", serif;
-    }
-
-    .gallery-main strong,
-    .gallery-mini strong {
-      display: block;
-      color: #6a5a43;
-      letter-spacing: .12em;
-      font-size: 16px;
-      font-weight: 500;
-      margin-bottom: 8px;
-    }
-
-    .gallery-main span,
-    .gallery-mini span {
-      display: block;
-      line-height: 1.9;
-      font-size: 13px;
+      min-height: 203px;
     }
 
     .cta-grid {
@@ -644,13 +573,6 @@
         border-radius: 22px;
       }
 
-      .photo-frame {
-        width: min(72%, 320px);
-        aspect-ratio: 3 / 4.35;
-        border-radius: 180px 180px 16px 16px;
-        padding: 20px;
-      }
-
       .topline {
         font-size: 10px;
         letter-spacing: .22em;
@@ -682,13 +604,6 @@
         margin-top: 24px;
         font-size: 13px;
         letter-spacing: .24em;
-      }
-
-      .venue {
-        margin-top: 14px;
-        font-size: 12px;
-        line-height: 2.1;
-        letter-spacing: .13em;
       }
 
       .section-inner {
@@ -729,7 +644,6 @@
         font-size: 40px;
       }
 
-
       .hero-meta {
         margin: 0 10px 10px;
         padding: 16px 14px;
@@ -744,7 +658,6 @@
       .hero-meta .dot {
         display: none;
       }
-
 
       .transport-card {
         padding: 18px 14px;
@@ -771,17 +684,7 @@
     <section class="hero">
       <div class="cover">
         <div class="photo-stage">
-          <div class="photo-placeholder">
-            <div class="photo-frame">
-              <div>
-                <strong>MAIN WEDDING PHOTO</strong>
-                <span>
-                  這裡預留你與老婆的主視覺照片<br>
-                  未來建議放直式婚紗照或半身合照
-                </span>
-              </div>
-            </div>
-          </div>
+          <img class="hero-photo" src="assets/photos/cover.svg" alt="Jay and Tilly wedding cover placeholder">
         </div>
 
         <div class="topline">
@@ -880,23 +783,14 @@
 
           <div class="photo-gallery">
             <div class="gallery-main">
-              <div>
-                <strong>PHOTO 01</strong>
-                <span>建議放橫式或氛圍感較強的主照片</span>
-              </div>
+              <img class="gallery-image" src="assets/photos/gallery-1.svg" alt="Main gallery placeholder">
             </div>
             <div class="gallery-side">
               <div class="gallery-mini">
-                <div>
-                  <strong>PHOTO 02</strong>
-                  <span>可放近景互動畫面</span>
-                </div>
+                <img class="gallery-image" src="assets/photos/gallery-2.svg" alt="Secondary gallery placeholder">
               </div>
               <div class="gallery-mini">
-                <div>
-                  <strong>PHOTO 03</strong>
-                  <span>可放較輕鬆自然的合照</span>
-                </div>
+                <img class="gallery-image" src="assets/photos/gallery-3.svg" alt="Tertiary gallery placeholder">
               </div>
             </div>
           </div>
@@ -941,7 +835,7 @@
           </div>
 
           <p class="note">
-            後續可再補：Google Maps 導航、飯店停車資訊、捷運與接駁建議、最後回覆期限。
+            後續可再補：Google 表單正式連結、最後回覆期限、停車資訊與正式照片裁切。
           </p>
         </div>
       </section>
