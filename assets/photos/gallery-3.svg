@@ -1,0 +1,13 @@
+<svg width="1000" height="900" viewBox="0 0 1000 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1000" y2="900" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#f8f3ea"/>
+      <stop offset="1" stop-color="#ead7b3"/>
+    </linearGradient>
+  </defs>
+  <rect width="1000" height="900" rx="36" fill="url(#bg)"/>
+  <rect x="120" y="100" width="760" height="700" rx="36" stroke="#C8A66A" stroke-opacity="0.62" stroke-width="4"/>
+  <circle cx="500" cy="380" r="120" fill="#fffaf1" fill-opacity="0.78"/>
+  <text x="500" y="458" text-anchor="middle" fill="#6A5A43" font-family="Georgia, serif" font-size="46" letter-spacing="4">GALLERY 03</text>
+  <text x="500" y="530" text-anchor="middle" fill="#7D6C54" font-family="Arial, sans-serif" font-size="26" letter-spacing="2">Casual couple photo</text>
+</svg>
