@@ -557,6 +557,131 @@
       padding-bottom: 12px;
     }
 
+    @media (min-width: 980px) {
+      .page {
+        width: min(1180px, calc(100% - 56px));
+        padding-top: 28px;
+      }
+
+      .ornament {
+        margin-bottom: 22px;
+      }
+
+      .hero {
+        border-radius: 38px;
+      }
+
+      .cover {
+        min-height: min(76vh, 760px);
+        padding: 32px;
+      }
+
+      .photo-stage {
+        inset: 24px;
+        border-radius: 32px;
+      }
+
+      .topline {
+        font-size: 12px;
+      }
+
+      .monogram {
+        width: 58px;
+        height: 58px;
+        font-size: 26px;
+      }
+
+      .cover-copy {
+        max-width: 760px;
+        margin-inline: auto;
+        padding-bottom: 32px;
+      }
+
+      .names {
+        font-size: clamp(76px, 8vw, 118px);
+        letter-spacing: .18em;
+      }
+
+      .date {
+        font-size: 16px;
+      }
+
+      .hero-meta {
+        margin: 0 24px 24px;
+        padding: 20px 28px;
+        font-size: 14px;
+      }
+
+      .content {
+        gap: 22px;
+        padding-top: 22px;
+      }
+
+      .section-inner {
+        padding: 38px 42px;
+      }
+
+      .section-copy {
+        max-width: 760px;
+      }
+
+      .event-grid,
+      .transport-grid,
+      .photo-gallery,
+      .cta-grid {
+        gap: 18px;
+      }
+
+      .gallery-main,
+      .gallery-side {
+        min-height: 460px;
+      }
+
+      .gallery-mini {
+        min-height: 221px;
+      }
+    }
+
+    @media (min-width: 761px) and (max-width: 979px) {
+      .page {
+        width: min(1040px, calc(100% - 36px));
+      }
+
+      .cover {
+        min-height: min(78vh, 760px);
+      }
+    }
+
+    @media (max-height: 560px) and (orientation: landscape) {
+      .cover {
+        min-height: 620px;
+      }
+
+      .scroll-hint {
+        display: none;
+      }
+    }
+
+    @media (max-width: 760px) and (orientation: landscape) {
+      .cover {
+        min-height: 620px;
+      }
+
+      .names {
+        font-size: clamp(38px, 9vw, 56px);
+      }
+
+      .hero-meta {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 8px 12px;
+      }
+
+      .hero-meta .dot {
+        display: none;
+      }
+    }
+
     @media (max-width: 760px) {
       .page {
         width: min(100%, calc(100% - 18px));
