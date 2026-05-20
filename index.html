@@ -557,98 +557,184 @@
       padding-bottom: 12px;
     }
 
-    @media (min-width: 980px) {
-      .page {
-        width: min(1180px, calc(100% - 56px));
-        padding-top: 28px;
-      }
-
-      .ornament {
-        margin-bottom: 22px;
-      }
-
-      .hero {
-        border-radius: 38px;
-      }
-
-      .cover {
-        min-height: min(76vh, 760px);
-        padding: 32px;
-      }
-
-      .photo-stage {
-        inset: 24px;
-        border-radius: 32px;
-      }
-
-      .topline {
-        font-size: 12px;
-      }
-
-      .monogram {
-        width: 58px;
-        height: 58px;
-        font-size: 26px;
-      }
-
-      .cover-copy {
-        max-width: 760px;
-        margin-inline: auto;
-        padding-bottom: 32px;
-      }
-
-      .names {
-        font-size: clamp(76px, 8vw, 118px);
-        letter-spacing: .18em;
-      }
-
-      .date {
-        font-size: 16px;
-      }
-
-      .hero-meta {
-        margin: 0 24px 24px;
-        padding: 20px 28px;
-        font-size: 14px;
-      }
-
-      .content {
-        gap: 22px;
-        padding-top: 22px;
-      }
-
-      .section-inner {
-        padding: 38px 42px;
-      }
-
-      .section-copy {
-        max-width: 760px;
-      }
-
-      .event-grid,
-      .transport-grid,
-      .photo-gallery,
-      .cta-grid {
-        gap: 18px;
-      }
-
-      .gallery-main,
-      .gallery-side {
-        min-height: 460px;
-      }
-
-      .gallery-mini {
-        min-height: 221px;
-      }
-    }
-
-    @media (min-width: 761px) and (max-width: 979px) {
+    @media (min-width: 761px) and (max-width: 1099px) {
       .page {
         width: min(1040px, calc(100% - 36px));
       }
 
       .cover {
         min-height: min(78vh, 760px);
+      }
+
+      .hero-meta {
+        flex-wrap: wrap;
+        row-gap: 10px;
+      }
+    }
+
+    @media (min-width: 1100px) {
+      .page {
+        width: min(1320px, calc(100% - 72px));
+        padding-top: 30px;
+      }
+
+      .ornament {
+        margin-bottom: 24px;
+      }
+
+      .hero {
+        display: grid;
+        grid-template-columns: minmax(0, 1.48fr) minmax(360px, .82fr);
+        align-items: stretch;
+        min-height: 680px;
+        border-radius: 42px;
+      }
+
+      .cover {
+        min-height: 680px;
+        padding: 34px;
+      }
+
+      .photo-stage {
+        inset: 26px;
+        border-radius: 34px;
+      }
+
+      .topline {
+        font-size: 12px;
+        letter-spacing: .32em;
+      }
+
+      .monogram {
+        width: 60px;
+        height: 60px;
+        font-size: 27px;
+      }
+
+      .cover-copy {
+        max-width: 760px;
+        margin-inline: 0;
+        padding: 0 28px 34px;
+        text-align: left;
+      }
+
+      .pretitle {
+        margin-bottom: 26px;
+        font-size: 12px;
+      }
+
+      .names {
+        font-size: clamp(76px, 6.9vw, 112px);
+        letter-spacing: .16em;
+        line-height: 1.06;
+      }
+
+      .date {
+        font-size: 17px;
+        letter-spacing: .34em;
+      }
+
+      .scroll-hint {
+        align-items: flex-start;
+      }
+
+      .hero-meta {
+        margin: 26px 26px 26px 0;
+        padding: 46px 42px;
+        min-width: 0;
+        border-radius: 32px;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 20px;
+        text-align: left;
+        font-size: 16px;
+        line-height: 1.9;
+        letter-spacing: .12em;
+      }
+
+      .hero-meta .dot {
+        display: none;
+      }
+
+      .hero-meta span {
+        display: block;
+        width: 100%;
+      }
+
+      .hero-meta span:nth-child(1) {
+        font-size: 21px;
+        line-height: 1.65;
+        letter-spacing: .12em;
+        color: #40372f;
+      }
+
+      .hero-meta span:nth-child(3),
+      .hero-meta span:nth-child(5) {
+        padding-top: 16px;
+        border-top: 1px solid rgba(125,155,142,.25);
+        font-size: 17px;
+      }
+
+      .content {
+        gap: 26px;
+        padding-top: 26px;
+      }
+
+      .section {
+        border-radius: 34px;
+      }
+
+      .section-inner {
+        padding: 46px 52px;
+      }
+
+      .section-copy {
+        max-width: 820px;
+        font-size: 16px;
+      }
+
+      .event-grid,
+      .transport-grid,
+      .photo-gallery,
+      .cta-grid {
+        gap: 20px;
+      }
+
+      .event-card,
+      .transport-item,
+      .cta-card {
+        padding: 26px 24px;
+      }
+
+      .event-value {
+        font-size: 16px;
+      }
+
+      .transport-card {
+        margin-top: 24px;
+        padding: 28px;
+      }
+
+      .transport-title {
+        font-size: 28px;
+      }
+
+      .transport-value {
+        font-size: 15px;
+      }
+
+      .gallery-main,
+      .gallery-side {
+        min-height: 520px;
+      }
+
+      .gallery-mini {
+        min-height: 250px;
+      }
+
+      .cta-card {
+        min-height: 248px;
       }
     }
 
