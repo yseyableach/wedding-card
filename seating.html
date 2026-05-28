@@ -225,18 +225,13 @@
       <div class="hero">
         <div class="eyebrow">Jay & Tilly Wedding</div>
         <h1>座位查詢</h1>
-        <p class="subtitle">請輸入姓名與手機末三碼查詢座位。新人或現場工作人員可輸入管理碼 913，方便只用姓名快速檢查座位。</p>
+        <p class="subtitle">請輸入姓名查詢座位。公開座位表僅保留姓名與桌號，不放手機末三碼或其他個資；若查不到，請找收禮桌、招待人員，或直接透過 LINE 聯絡新人。</p>
       </div>
 
       <form class="form" id="seatForm">
         <div>
           <label for="guestName">姓名</label>
           <input id="guestName" name="guestName" type="text" autocomplete="name" placeholder="例如：王小明" required>
-        </div>
-
-        <div>
-          <label for="phoneLast3">手機末三碼或管理碼</label>
-          <input id="phoneLast3" name="phoneLast3" type="tel" inputmode="numeric" maxlength="3" placeholder="例如：123 / 913" required>
         </div>
 
         <div class="button-row">
@@ -254,7 +249,6 @@
   </main>
 
   <script>
-    const ADMIN_CODE = "913";
     const LINE_URL = "https://line.me/ti/p/uoeoVgzZpK";
     const normalize = (value) => String(value || "").trim().replace(/\s+/g, "").toLowerCase();
     const resultEl = document.getElementById("result");
@@ -273,35 +267,27 @@
       }
     }
 
-    function renderResult(guest) {
-      if (!guest) {
+    function renderResult(matches) {
+      if (!matches.length) {
         resultEl.className = "result show";
         resultEl.innerHTML = `<div class='result-title'>查無資料</div><div class='muted'>查無符合的座位資料。請確認姓名是否為報名時填寫的姓名；若仍查不到，請找現場收禮桌、招待協助確認，或直接透過 LINE 聯絡新人。</div><a class='line-link' href='${LINE_URL}' target='_blank' rel='noopener noreferrer'>LINE 聯絡新人</a>`;
         return;
       }
 
       resultEl.className = "result show";
-      resultEl.innerHTML = `
+      resultEl.innerHTML = matches.map((guest) => `
         <div class="result-title">Seat Found</div>
         <div>${guest.name} 您好，您的座位是：</div>
         <div class="seat-table">${guest.table}</div>
         <div class="muted">${guest.group ? `分類：${guest.group}<br>` : ""}${guest.note || "請於 11:30 入席。"}</div>
-      `;
+      `).join("<hr style='border:0;border-top:1px solid rgba(125,155,142,.30);margin:18px 0;'>");
     }
 
     form.addEventListener("submit", (event) => {
       event.preventDefault();
       const name = normalize(document.getElementById("guestName").value);
-      const code = normalize(document.getElementById("phoneLast3").value);
-
-      const guest = seats.find((item) => {
-        const sameName = normalize(item.name) === name;
-        const samePhone = normalize(item.phoneLast3) === code;
-        const adminLookup = code === ADMIN_CODE;
-        return sameName && (samePhone || adminLookup);
-      });
-
-      renderResult(guest);
+      const matches = seats.filter((item) => normalize(item.name) === name);
+      renderResult(matches);
     });
 
     loadSeats();
