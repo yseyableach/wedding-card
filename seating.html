@@ -15,7 +15,6 @@
       --soft-ink: #75685d;
       --gold: #c08a55;
       --rose: #d7a59a;
-      --sage: #7d9b8e;
       --line: rgba(125, 155, 142, .32);
       --card: rgba(255, 248, 236, .88);
       --shadow: 0 24px 80px rgba(93, 73, 53, .14);
@@ -226,7 +225,7 @@
       <div class="hero">
         <div class="eyebrow">Jay & Tilly Wedding</div>
         <h1>座位查詢</h1>
-        <p class="subtitle">請輸入您的姓名與手機末三碼查詢座位。現場工作人員也可輸入管理碼協助查詢；若找不到座位，請直接點下方 LINE 聯絡新人或現場工作人員。</p>
+        <p class="subtitle">請輸入姓名與手機末三碼查詢座位。新人或現場工作人員可輸入管理碼 913，方便只用姓名快速檢查座位。</p>
       </div>
 
       <form class="form" id="seatForm">
@@ -237,7 +236,7 @@
 
         <div>
           <label for="phoneLast3">手機末三碼或管理碼</label>
-          <input id="phoneLast3" name="phoneLast3" type="tel" inputmode="numeric" maxlength="4" placeholder="例如：123" required>
+          <input id="phoneLast3" name="phoneLast3" type="tel" inputmode="numeric" maxlength="3" placeholder="例如：123 / 913" required>
         </div>
 
         <div class="button-row">
@@ -255,7 +254,7 @@
   </main>
 
   <script>
-    const ADMIN_CODE = "0501";
+    const ADMIN_CODE = "913";
     const LINE_URL = "https://line.me/ti/p/uoeoVgzZpK";
     const normalize = (value) => String(value || "").trim().replace(/\s+/g, "").toLowerCase();
     const resultEl = document.getElementById("result");
