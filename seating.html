@@ -217,7 +217,7 @@
       <div class="hero">
         <div class="eyebrow">Jay & Tilly Wedding</div>
         <h1>座位查詢</h1>
-        <p class="subtitle">請輸入您的姓名與手機末三碼查詢座位。若查不到資料，可能是姓名格式不同或座位尚未完成安排，請直接透過 LINE 聯絡我們。</p>
+        <p class="subtitle">請輸入您的姓名與手機末三碼查詢座位。現場工作人員也可輸入管理碼協助查詢。</p>
       </div>
 
       <form class="form" id="seatForm">
@@ -227,8 +227,8 @@
         </div>
 
         <div>
-          <label for="phoneLast3">手機末三碼</label>
-          <input id="phoneLast3" name="phoneLast3" type="tel" inputmode="numeric" maxlength="3" placeholder="例如：123" required>
+          <label for="phoneLast3">手機末三碼或管理碼</label>
+          <input id="phoneLast3" name="phoneLast3" type="tel" inputmode="numeric" maxlength="4" placeholder="例如：123" required>
         </div>
 
         <div class="button-row">
@@ -244,6 +244,7 @@
   </main>
 
   <script>
+    const ADMIN_CODE = "0501";
     const normalize = (value) => String(value || "").trim().replace(/\s+/g, "").toLowerCase();
     const resultEl = document.getElementById("result");
     const form = document.getElementById("seatForm");
@@ -264,7 +265,7 @@
     function renderResult(guest) {
       if (!guest) {
         resultEl.className = "result show";
-        resultEl.innerHTML = "<div class='result-title'>查無資料</div><div class='muted'>查無符合的座位資料。請確認姓名與手機末三碼是否正確，或直接透過 LINE 聯絡我們協助確認。</div>";
+        resultEl.innerHTML = "<div class='result-title'>查無資料</div><div class='muted'>查無符合的座位資料。請確認姓名是否為報名時填寫的姓名；若仍查不到，請找現場收禮桌或招待協助確認。</div>";
         return;
       }
 
@@ -280,10 +281,13 @@
     form.addEventListener("submit", (event) => {
       event.preventDefault();
       const name = normalize(document.getElementById("guestName").value);
-      const phoneLast3 = normalize(document.getElementById("phoneLast3").value);
+      const code = normalize(document.getElementById("phoneLast3").value);
 
       const guest = seats.find((item) => {
-        return normalize(item.name) === name && normalize(item.phoneLast3) === phoneLast3;
+        const sameName = normalize(item.name) === name;
+        const samePhone = normalize(item.phoneLast3) === code;
+        const adminLookup = code === ADMIN_CODE;
+        return sameName && (samePhone || adminLookup);
       });
 
       renderResult(guest);
