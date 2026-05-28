@@ -136,7 +136,8 @@
     }
 
     button,
-    .back-link {
+    .back-link,
+    .line-link {
       min-height: 54px;
       border-radius: 999px;
       border: 0;
@@ -160,6 +161,14 @@
       color: #4b4037;
       border: 1px solid rgba(125,155,142,.44);
       background: rgba(255,248,236,.72);
+    }
+
+    .line-link {
+      color: #fff;
+      background: linear-gradient(135deg, #06c755, #3aa76d);
+      box-shadow: 0 14px 32px rgba(6,199,85,.18);
+      margin-top: 12px;
+      width: 100%;
     }
 
     .result {
@@ -217,7 +226,7 @@
       <div class="hero">
         <div class="eyebrow">Jay & Tilly Wedding</div>
         <h1>座位查詢</h1>
-        <p class="subtitle">請輸入您的姓名與手機末三碼查詢座位。現場工作人員也可輸入管理碼協助查詢。</p>
+        <p class="subtitle">請輸入您的姓名與手機末三碼查詢座位。現場工作人員也可輸入管理碼協助查詢；若找不到座位，請直接點下方 LINE 聯絡新人或現場工作人員。</p>
       </div>
 
       <form class="form" id="seatForm">
@@ -238,6 +247,8 @@
 
         <div class="result" id="result" aria-live="polite"></div>
 
+        <a class="line-link" href="https://line.me/ti/p/uoeoVgzZpK" target="_blank" rel="noopener noreferrer">LINE 聯絡新人</a>
+
         <div class="notice">婚宴地點：台北萬豪酒店 36F 寰宇廳｜11:30 恭候入席｜12:00 宴席開始</div>
       </form>
     </section>
@@ -245,6 +256,7 @@
 
   <script>
     const ADMIN_CODE = "0501";
+    const LINE_URL = "https://line.me/ti/p/uoeoVgzZpK";
     const normalize = (value) => String(value || "").trim().replace(/\s+/g, "").toLowerCase();
     const resultEl = document.getElementById("result");
     const form = document.getElementById("seatForm");
@@ -258,14 +270,14 @@
         seats = await response.json();
       } catch (error) {
         resultEl.className = "result show";
-        resultEl.innerHTML = "<div class='result-title'>System Notice</div><div class='muted'>目前無法讀取座位資料，請稍後再試或直接透過 LINE 聯絡我們。</div>";
+        resultEl.innerHTML = `<div class='result-title'>System Notice</div><div class='muted'>目前無法讀取座位資料，請稍後再試或直接透過 LINE 聯絡我們。</div><a class='line-link' href='${LINE_URL}' target='_blank' rel='noopener noreferrer'>LINE 聯絡新人</a>`;
       }
     }
 
     function renderResult(guest) {
       if (!guest) {
         resultEl.className = "result show";
-        resultEl.innerHTML = "<div class='result-title'>查無資料</div><div class='muted'>查無符合的座位資料。請確認姓名是否為報名時填寫的姓名；若仍查不到，請找現場收禮桌或招待協助確認。</div>";
+        resultEl.innerHTML = `<div class='result-title'>查無資料</div><div class='muted'>查無符合的座位資料。請確認姓名是否為報名時填寫的姓名；若仍查不到，請找現場收禮桌、招待協助確認，或直接透過 LINE 聯絡新人。</div><a class='line-link' href='${LINE_URL}' target='_blank' rel='noopener noreferrer'>LINE 聯絡新人</a>`;
         return;
       }
 
