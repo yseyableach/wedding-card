@@ -9,10 +9,10 @@
 
 ## 主要檔案
 - `index.html`：主頁面與全部樣式。
-- `assets/photos/cover.svg`：首頁主視覺預留圖。
-- `assets/photos/gallery-1.svg`：照片區主圖預留圖。
-- `assets/photos/gallery-2.svg`：照片區輔助圖 1。
-- `assets/photos/gallery-3.svg`：照片區輔助圖 2。
+- `assets/photos/cover.jpg`：首頁主視覺預留圖。
+- `assets/photos/gallery-1.jpg`：照片區主圖預留圖。
+- `assets/photos/gallery-2.jpg`：照片區輔助圖 1。
+- `assets/photos/gallery-3.jpg`：照片區輔助圖 2。
 - `README.md`：專案說明與替換指南。
 
 ## 編修規則

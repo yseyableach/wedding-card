@@ -22,20 +22,20 @@ Jay & Tilly 的婚禮電子喜帖，採 **極簡白金婚禮感**、**手機優�
 ├── AGENTS.md
 └── assets/
     └── photos/
-        ├── cover.svg
-        ├── gallery-1.svg
-        ├── gallery-2.svg
-        └── gallery-3.svg
+        ├── cover.jpg
+        ├── gallery-1.jpg
+        ├── gallery-2.jpg
+        └── gallery-3.jpg
 ```
 
 ## 後續換成正式照片
 
 未來婚紗照拍好後，優先替換：
 
-- `assets/photos/cover.svg`：首頁主視覺，建議用直式婚紗照或半身合照
-- `assets/photos/gallery-1.svg`：照片區主圖，建議用橫式氛圍照
-- `assets/photos/gallery-2.svg`：照片區輔助圖
-- `assets/photos/gallery-3.svg`：照片區輔助圖
+- `assets/photos/cover.jpg`：首頁主視覺，建議用直式婚紗照或半身合照
+- `assets/photos/gallery-1.jpg`：照片區主圖，建議用橫式氛圍照
+- `assets/photos/gallery-2.jpg`：照片區輔助圖
+- `assets/photos/gallery-3.jpg`：照片區輔助圖
 
 若改成 `.jpg` 或 `.png`，請同步更新 `index.html` 裡的圖片路徑。
 

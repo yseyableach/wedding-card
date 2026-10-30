@@ -464,6 +464,16 @@
       min-height: 203px;
     }
 
+    .gallery-wide {
+      grid-column: 1 / -1;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(125,155,142,.30);
+      border-radius: 26px;
+      background: #f2e4cf;
+      min-height: 380px;
+    }
+
     .cta-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -846,10 +856,16 @@
 
       .gallery-side {
         min-height: unset;
+        grid-template-rows: none;
+        grid-template-columns: 1fr 1fr;
       }
 
       .gallery-mini {
-        min-height: 190px;
+        min-height: 240px;
+      }
+
+      .gallery-wide {
+        min-height: 300px;
       }
 
       .cta-card {
@@ -900,7 +916,7 @@
     <section class="hero">
       <div class="cover">
         <div class="photo-stage">
-          <img class="hero-photo" src="assets/photos/cover.svg" alt="Jay and Tilly wedding cover placeholder">
+          <img class="hero-photo" src="assets/photos/cover.jpg" alt="Jay 與 Tilly 婚紗照" style="object-position: center 30%">
         </div>
 
         <div class="topline">
@@ -993,23 +1009,25 @@
       <section class="section">
         <div class="section-inner">
           <p class="section-title">Our Moments</p>
-          <h2 class="section-headline">照片區預留</h2>
+          <h2 class="section-headline">我們的故事</h2>
           <p class="section-copy">
-            等婚紗照拍好後，這裡可以放 3 張照片：
-            一張主圖加兩張輔助圖，整體會比單純資訊頁更有「你們的故事」。
+            從日常的小事到決定攜手一生，謝謝你一路陪我們走到這裡。
           </p>
 
           <div class="photo-gallery">
             <div class="gallery-main">
-              <img class="gallery-image" src="assets/photos/gallery-1.svg" alt="Main gallery placeholder">
+              <img class="gallery-image" src="assets/photos/gallery-1.jpg" alt="草地上的 Jay 與 Tilly" style="object-position: center 40%">
             </div>
             <div class="gallery-side">
               <div class="gallery-mini">
-                <img class="gallery-image" src="assets/photos/gallery-2.svg" alt="Secondary gallery placeholder">
+                <img class="gallery-image" src="assets/photos/gallery-2.jpg" alt="Jay 與 Tilly 棚拍合照" style="object-position: center 42%">
               </div>
               <div class="gallery-mini">
-                <img class="gallery-image" src="assets/photos/gallery-3.svg" alt="Tertiary gallery placeholder">
+                <img class="gallery-image" src="assets/photos/gallery-3.jpg" alt="Jay 與 Tilly 臉貼臉合照" style="object-position: center 42%">
               </div>
+            </div>
+            <div class="gallery-wide">
+              <img class="gallery-image" src="assets/photos/gallery-4.jpg" alt="Jay 與 Tilly 戶外婚紗" style="object-position: center 32%">
             </div>
           </div>
         </div>
