@@ -9,15 +9,15 @@
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --paper: #f7eddc;
-      --paper-2: #ead7bf;
-      --ink: #40372f;
-      --soft-ink: #75685d;
-      --gold: #c08a55;
-      --rose: #d7a59a;
-      --line: rgba(125, 155, 142, .32);
-      --card: rgba(255, 248, 236, .88);
-      --shadow: 0 24px 80px rgba(93, 73, 53, .14);
+      --paper: #f3f3ef;
+      --paper-2: #e7eae4;
+      --ink: #1c1f1c;
+      --soft-ink: #5c635d;
+      --gold: #2f4a3a;
+      --rose: #c9d3cb;
+      --line: rgba(47,74,58, .32);
+      --card: rgba(250,250,247, .88);
+      --shadow: 0 24px 80px rgba(18,26,20, .14);
     }
 
     * { box-sizing: border-box; }
@@ -27,9 +27,9 @@
       min-height: 100vh;
       color: var(--ink);
       background:
-        radial-gradient(circle at 14% 14%, rgba(215,165,154,.34), transparent 30%),
-        radial-gradient(circle at 86% 10%, rgba(184,199,198,.42), transparent 28%),
-        linear-gradient(180deg, var(--paper) 0%, #f7eddc 44%, var(--paper-2) 100%);
+        radial-gradient(circle at 14% 14%, rgba(201,211,203,.34), transparent 30%),
+        radial-gradient(circle at 86% 10%, rgba(214,219,212,.42), transparent 28%),
+        linear-gradient(180deg, var(--paper) 0%, #f3f3ef 44%, var(--paper-2) 100%);
       font-family: Futura, "Avenir Next", "Century Gothic", "Noto Sans TC", sans-serif;
     }
 
@@ -40,8 +40,8 @@
       pointer-events: none;
       opacity: .30;
       background-image:
-        linear-gradient(rgba(125,155,142,.08) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(192,138,85,.06) 1px, transparent 1px);
+        linear-gradient(rgba(47,74,58,.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(47,74,58,.06) 1px, transparent 1px);
       background-size: 84px 84px;
       mask-image: linear-gradient(180deg, rgba(0,0,0,.64), transparent 78%);
     }
@@ -66,7 +66,7 @@
       padding: 38px 30px 28px;
       text-align: center;
       background:
-        radial-gradient(circle at top right, rgba(215,165,154,.30), transparent 34%),
+        radial-gradient(circle at top right, rgba(201,211,203,.30), transparent 34%),
         linear-gradient(180deg, rgba(255,255,255,.30), transparent 55%);
     }
 
@@ -112,19 +112,19 @@
     input {
       width: 100%;
       min-height: 54px;
-      border: 1px solid rgba(125,155,142,.34);
+      border: 1px solid rgba(47,74,58,.34);
       border-radius: 18px;
       padding: 0 16px;
       color: var(--ink);
-      background: rgba(255,248,236,.82);
+      background: rgba(250,250,247,.82);
       font: inherit;
       font-size: 16px;
       outline: none;
     }
 
     input:focus {
-      border-color: rgba(192,138,85,.72);
-      box-shadow: 0 0 0 4px rgba(192,138,85,.12);
+      border-color: rgba(47,74,58,.72);
+      box-shadow: 0 0 0 4px rgba(47,74,58,.12);
     }
 
     .button-row {
@@ -152,14 +152,14 @@
 
     button {
       color: #fff;
-      background: linear-gradient(135deg, #c08a55, #d7a59a);
-      box-shadow: 0 16px 38px rgba(192,138,85,.22);
+      background: linear-gradient(135deg, #2f4a3a, #c9d3cb);
+      box-shadow: 0 16px 38px rgba(47,74,58,.22);
     }
 
     .back-link {
-      color: #4b4037;
-      border: 1px solid rgba(125,155,142,.44);
-      background: rgba(255,248,236,.72);
+      color: #262a26;
+      border: 1px solid rgba(47,74,58,.44);
+      background: rgba(250,250,247,.72);
     }
 
     .line-link {
@@ -174,9 +174,9 @@
       display: none;
       margin-top: 8px;
       padding: 22px;
-      border: 1px solid rgba(125,155,142,.30);
+      border: 1px solid rgba(47,74,58,.30);
       border-radius: 24px;
-      background: rgba(255,248,236,.78);
+      background: rgba(250,250,247,.78);
       line-height: 1.9;
     }
 
@@ -204,7 +204,7 @@
 
     .notice {
       margin-top: 18px;
-      color: rgba(117,104,93,.86);
+      color: rgba(92,99,93,.86);
       font-size: 13px;
       line-height: 1.9;
       text-align: center;
@@ -280,7 +280,7 @@
         <div>${guest.name} 您好，您的座位是：</div>
         <div class="seat-table">${guest.table}</div>
         <div class="muted">${guest.group ? `分類：${guest.group}<br>` : ""}${guest.note || "請於 11:30 入席。"}</div>
-      `).join("<hr style='border:0;border-top:1px solid rgba(125,155,142,.30);margin:18px 0;'>");
+      `).join("<hr style='border:0;border-top:1px solid rgba(47,74,58,.30);margin:18px 0;'>");
     }
 
     form.addEventListener("submit", (event) => {
