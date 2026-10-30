@@ -296,6 +296,84 @@
       padding: 30px;
     }
 
+    /* Countdown */
+    .countdown {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-top: 26px;
+    }
+
+    .cd-unit {
+      position: relative;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      background: linear-gradient(180deg, rgba(250,250,247,.96), rgba(231,234,228,.9));
+      padding: 18px 4px 14px;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .cd-unit::after {
+      content: "";
+      position: absolute;
+      left: 12%;
+      right: 12%;
+      top: 0;
+      height: 2px;
+      border-radius: 2px;
+      background: var(--gold);
+      transform-origin: left;
+      transform: scaleX(var(--p, 0));
+      transition: transform .9s linear;
+    }
+
+    .cd-num {
+      display: block;
+      height: 1.15em;
+      overflow: hidden;
+      font-size: clamp(30px, 8.5vw, 48px);
+      font-weight: 500;
+      line-height: 1.15;
+      color: #1c1f1c;
+      font-variant-numeric: tabular-nums;
+      letter-spacing: .02em;
+    }
+
+    .cd-num span {
+      display: block;
+    }
+
+    .cd-num span.roll {
+      animation: cd-roll .55s cubic-bezier(.2,.8,.2,1);
+    }
+
+    @keyframes cd-roll {
+      0% { transform: translateY(70%); opacity: 0; filter: blur(2px); }
+      100% { transform: translateY(0); opacity: 1; filter: blur(0); }
+    }
+
+    .cd-label {
+      display: block;
+      margin-top: 8px;
+      font-size: 12px;
+      letter-spacing: .3em;
+      color: var(--soft-ink);
+    }
+
+    .cd-done {
+      margin: 26px 0 0;
+      text-align: center;
+      font-size: 22px;
+      letter-spacing: .2em;
+      color: var(--gold);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .cd-num span.roll { animation: none; }
+      .cd-unit::after { transition: none; }
+    }
+
     .section-title {
       margin: 0;
       text-align: center;
@@ -961,6 +1039,20 @@
     </section>
 
     <div class="content">
+      <section class="section" aria-labelledby="cd-title">
+        <div class="section-inner">
+          <p class="section-title">Countdown</p>
+          <h2 class="section-headline" id="cd-title">距離我們的婚禮還有</h2>
+          <div class="countdown" id="countdown" data-target="2027-05-01T11:30:00+08:00" role="timer" aria-live="off">
+            <div class="cd-unit" data-u="d"><span class="cd-num"><span>--</span></span><span class="cd-label">天</span></div>
+            <div class="cd-unit" data-u="h"><span class="cd-num"><span>--</span></span><span class="cd-label">時</span></div>
+            <div class="cd-unit" data-u="m"><span class="cd-num"><span>--</span></span><span class="cd-label">分</span></div>
+            <div class="cd-unit" data-u="s"><span class="cd-num"><span>--</span></span><span class="cd-label">秒</span></div>
+          </div>
+          <p class="cd-done" id="cd-done" hidden>就是今天，謝謝你來 ♡</p>
+        </div>
+      </section>
+
       <section class="section">
         <div class="section-inner">
           <p class="section-title">The Celebration</p>
@@ -1104,5 +1196,51 @@
     <div class="footer-sign">With Love</div>
     <div class="footer-note">Jay &amp; Tilly · 2027.05.01</div>
   </main>
+
+  <script>
+    (function () {
+      var box = document.getElementById('countdown');
+      if (!box) return;
+      var target = new Date(box.dataset.target).getTime();
+      var units = {};
+      box.querySelectorAll('.cd-unit').forEach(function (el) { units[el.dataset.u] = el; });
+      var maxes = { h: 24, m: 60, s: 60 };
+
+      function set(u, value, progress) {
+        var el = units[u];
+        var text = u === 'd' ? String(value) : String(value).padStart(2, '0');
+        var holder = el.querySelector('.cd-num');
+        var cur = holder.firstElementChild;
+        if (cur.textContent !== text) {
+          var next = document.createElement('span');
+          next.textContent = text;
+          next.className = 'roll';
+          holder.replaceChild(next, cur);
+        }
+        el.style.setProperty('--p', progress);
+      }
+
+      function tick() {
+        var diff = target - Date.now();
+        if (diff <= 0) {
+          box.hidden = true;
+          document.getElementById('cd-done').hidden = false;
+          document.getElementById('cd-title').textContent = '我們的婚禮';
+          return;
+        }
+        var sec = Math.floor(diff / 1000);
+        var d = Math.floor(sec / 86400);
+        var h = Math.floor(sec % 86400 / 3600);
+        var m = Math.floor(sec % 3600 / 60);
+        var s = sec % 60;
+        set('d', d, 1);
+        set('h', h, h / maxes.h);
+        set('m', m, m / maxes.m);
+        set('s', s, s / maxes.s);
+        setTimeout(tick, 1000 - (Date.now() % 1000) + 5);
+      }
+      tick();
+    })();
+  </script>
 </body>
 </html>
